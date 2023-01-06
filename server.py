@@ -43,8 +43,32 @@ def find_afterparties():
     url = 'https://app.ticketmaster.com/discovery/v2/events'
     payload = {'apikey': API_KEY}
 
-    # TODO: Make a request to the Event Search endpoint to search for events
-    #
+    
+
+    # Make a request to the Event Search endpoint to search for events
+    res = requests.get(url, params=payload)
+    # ^ make a request to an endpoint: takes URL as str, 
+        # returns Response object.
+        # pass payload dict as a keyword argument called params
+
+    data = res.json()
+    # ^ getting str from ticketmaster
+
+    list_events = data['_embedded']['list_events']
+    # ^ gets list of events out of data, storing in variable list_events"
+    
+    payload['postalCode'] = 'postalcode'
+    print("this is an event", list_events[0])
+
+    list_events.keys()
+    # data = {'Test': ['This is just some test data'],
+            # 'page': {'totalElements': 1}}
+
+    events = []
+    for event in list_events:
+        # if event zipcode within user entered radius of user entered zipcode
+        events.append(event)
+        
     # - Use form data from the user to populate any search parameters
     #
     # - Make sure to save the JSON data from the response to the `data`
@@ -54,9 +78,7 @@ def find_afterparties():
     # - Replace the empty list in `events` with the list of events from your
     #   search results
 
-    data = {'Test': ['This is just some test data'],
-            'page': {'totalElements': 1}}
-    events = []
+
 
     return render_template('search-results.html',
                            pformat=pformat,
