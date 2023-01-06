@@ -53,15 +53,15 @@ def find_afterparties():
 
     data = res.json()
     # ^ getting str from ticketmaster
-
-    list_events = data['_embedded']['list_events']
+    # print("this is data", data['_embedded'])
+    print("this is keys", list(data['_embedded'].keys()))
+    list_events = data['_embedded']['events']
     # ^ gets list of events out of data, storing in variable list_events"
-    
+
     # payload['postalCode'] = 'postalcode'
-    print("this is an event", list_events[0])
+    # print("this is an event", list_events[0])
     # MAKE ARRAY of all events
 
-    list_events.keys()
     # data = {'Test': ['This is just some test data'],
             # 'page': {'totalElements': 1}}
 
