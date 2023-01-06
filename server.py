@@ -57,8 +57,9 @@ def find_afterparties():
     list_events = data['_embedded']['list_events']
     # ^ gets list of events out of data, storing in variable list_events"
     
-    payload['postalCode'] = 'postalcode'
+    # payload['postalCode'] = 'postalcode'
     print("this is an event", list_events[0])
+    # MAKE ARRAY of all events
 
     list_events.keys()
     # data = {'Test': ['This is just some test data'],
@@ -68,6 +69,7 @@ def find_afterparties():
     for event in list_events:
         # if event zipcode within user entered radius of user entered zipcode
         events.append(event)
+        print(event)
         
     # - Use form data from the user to populate any search parameters
     #
