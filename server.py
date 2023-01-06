@@ -54,7 +54,7 @@ def find_afterparties():
     data = res.json()
     # ^ getting str from ticketmaster
     # print("this is data", data['_embedded'])
-    print("this is keys", list(data['_embedded'].keys()))
+    # print("this is keys", list(data['_embedded'].keys()))
     list_events = data['_embedded']['events']
     # ^ gets list of events out of data, storing in variable list_events"
 
@@ -69,7 +69,7 @@ def find_afterparties():
     for event in list_events:
         # if event zipcode within user entered radius of user entered zipcode
         events.append(event)
-        print(event)
+        # print(event)
         
     # - Use form data from the user to populate any search parameters
     #
@@ -96,10 +96,32 @@ def find_afterparties():
 @app.route('/event/<id>')
 def get_event_details(id):
     """View the details of an event."""
-
     # TODO: Finish implementing this view function
+    print(id)
+    # url = 'https://app.ticketmaster.com/discovery/v2/events/{G5vYZ98wrHxhM}'
+    url = f'https://app.ticketmaster.com/discovery/v2/events/{id}'
+    payload = {'apikey': API_KEY}
 
-    return render_template('event-details.html')
+    # makes a request to event search endpoint to search for events
+    res = requests.get(url, params=payload)
+
+    # saves the json data to a variable 'data'
+    data = res.json()
+    print("this is the data", data)
+    
+    # dictionary from json data
+    # event_by_id = data['events'][id]
+    # print("this is the event", event_by_id)
+
+    id_event = data['_embedded'][id]
+
+
+    # event_details = []
+    # for event in event_by_id:
+    #     event_details.append(event)
+
+
+    return render_template('event-details.html',event=id_event)
 
 
 if __name__ == '__main__':
